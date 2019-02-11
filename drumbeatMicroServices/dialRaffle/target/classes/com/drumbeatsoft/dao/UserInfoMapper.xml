@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drumbeatsoft.dao.UserInfoMapper">
+    <resultMap id="findByUsernameMap" type="com.drumbeatsoft.model.UserInfo">
+        <id property="id" column="Id"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="companyId" column="CompanyId"></result>
+        <result property="companyName" column="CompanyName"></result>
+        <result property="status" column="Status"></result>
+        <collection property="roles" ofType="com.drumbeatsoft.model.Role" column="id" select="com.drumbeatsoft.dao.RoleMapper.findRoleByUserId"></collection>
+    </resultMap>
+    <select id="findByUsername" parameterType="String" resultMap="findByUsernameMap">
+        select * from userinfo where username = #{username}
+    </select>
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.drumbeatsoft.dao.ActivityMapper">
+
+    <insert id="save" parameterType="com.drumbeatsoft.model.Activity">
+          insert into activity (
+              ActivityId,
+              Title,
+              StartTime,
+              EndTime,
+              Times,
+              CreateUserId,
+              CreateUserName,
+              CompanyId,
+              CompanyName,
+              Multiple
+          ) values (
+              #{activityId},
+              #{title},
+              #{startTime},
+              #{endTime},
+              #{times},
+              #{createUserId},
+              #{createUserName},
+              #{companyId},
+              #{companyName},
+              #{multiple}
+          )
+    </insert>
+
+    <select id="findById" parameterType="String" resultType="com.drumbeatsoft.model.Activity">
+        select * from activity where ActivityId = #{activityId}
+    </select>
+
+    <select id="findAll" resultType="com.drumbeatsoft.model.Activity">
+        select * from activity;
+    </select>
+
+    <update id="alterStatus">
+        update activity set Status = #{arg1} where ActivityId = #{arg0}
+    </update>
+
+    <delete id="deleteById" parameterType="String">
+        delete from activity where ActivityId = #{activityId}
+    </delete>
+
+    <update id="update" parameterType="com.drumbeatsoft.model.Activity">
+        update activity set
+          Title = #{title},
+          StartTime = #{startTime},
+          EndTime = #{endTime},
+          Times = #{times},
+          Multiple = #{multiple}
+        where ActivityId = #{activityId}
+    </update>
+
+    <select id="findByCompanyId" parameterType="String" resultType="com.drumbeatsoft.model.Activity">
+        select * from activity where CompanyId = #{companyId}
+    </select>
+</mapper>

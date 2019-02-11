@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drumbeatsoft.dao.RoleMapper">
+    <select id="findRoleByUserId" parameterType="String" resultType="com.drumbeatsoft.model.Role">
+        select * from role where id in (select RoleId from user_role where UserId=#{userId})
+    </select>
+</mapper>
